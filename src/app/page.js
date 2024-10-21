@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import SearchBar from "./SearchBar";
+import SearchBar from "./components/SearchBar";
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState("");
@@ -11,10 +11,10 @@ export default function Home() {
   const keyDownTimer = useRef(undefined);
 
   useEffect(() => {
-    if (localStorage.getItem("searchResults")) {
-      const bestMatches = JSON.parse(localStorage.getItem("searchResults"));
-      setRecommendations(bestMatches.bestMatches);
-    }
+    // if (localStorage.getItem("searchResults")) {
+    //   const bestMatches = JSON.parse(localStorage.getItem("searchResults"));
+    //   setRecommendations(bestMatches.bestMatches);
+    // }
 
     document.addEventListener("click", () => {
       setIsRecommendationsOpen(false);
@@ -22,20 +22,22 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (keyDownTimer) {
-      clearTimeout(keyDownTimer.current);
+    if (searchValue) {
+      if (keyDownTimer) {
+        clearTimeout(keyDownTimer.current);
+      }
+      keyDownTimer.current = setTimeout(() => {
+        fetch(
+          `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${searchValue}&apikey=EF5DSD29211PHUA8`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            // localStorage.setItem("searchResults", JSON.stringify(data));
+            setRecommendations(data.bestMatches);
+            // setIsRecommendationsOpen(true);
+          });
+      }, 300);
     }
-    // keyDownTimer.current = setTimeout(() => {
-    //   fetch(
-    //     `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${searchValue}&apikey=EF5DSD29211PHUA8`
-    //   )
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       // localStorage.setItem("searchResults", JSON.stringify(data));
-    //       // setRecommendations(data.bestMatches);
-    //       // setIsRecommendationsOpen(true);
-    //     });
-    // }, 300);
   }, [searchValue]);
 
   function handleSearch(val) {

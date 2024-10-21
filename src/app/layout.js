@@ -30,7 +30,9 @@ export default function RootLayout({ children }) {
             <NavLink href="/favourites">Favourite Stocks</NavLink>
           </div>
         </nav>
-        <main className="text-black p-2 h-full w-full">{children}</main>
+        <main className="text-black p-2 h-full w-full max-w-[1000px]">
+          {children}
+        </main>
       </body>
     </html>
   );

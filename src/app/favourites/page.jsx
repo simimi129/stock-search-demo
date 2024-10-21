@@ -28,7 +28,7 @@ export default function FavouriteStocksPage() {
   }
 
   return (
-    <div>
+    <div className="flex flex-wrap gap-4 max-w-[1000px] justify-center">
       {favouriteStocks.map((stock) => (
         <StockDetails
           key={stock["stockOverview"]["Symbol"]}

@@ -19,7 +19,7 @@ export default function StockDetails({
         }
       });
     }
-  }, []);
+  }, [stockOverview]);
 
   function addFavourite() {
     const newFav = {
@@ -44,7 +44,9 @@ export default function StockDetails({
       );
       localStorage.setItem("favourites", JSON.stringify(favourites));
       setIsFavourite(false);
-      onRemoveFavourite();
+      if (onRemoveFavourite) {
+        onRemoveFavourite();
+      }
     }
   }
 
