@@ -18,10 +18,10 @@ export default function SearchBar({ onSearch }) {
   }
 
   return (
-    <div className="flex w-full rounded-md overflow-hidden p-2 gap-2 items-center bg-gray-100">
-      <IoSearchOutline className="text-gray-500 text-2xl" />
+    <div className="flex w-full items-center gap-2 overflow-hidden rounded-md bg-gray-100 p-2">
+      <IoSearchOutline className="text-2xl text-gray-500" />
       <input
-        className="bg-gray-100 w-full outline-none"
+        className="w-full bg-gray-100 outline-none"
         type="text"
         placeholder="Start typing..."
         value={searchValue}
@@ -29,7 +29,7 @@ export default function SearchBar({ onSearch }) {
       />
       <IoCloseCircle
         onClick={resetSearch}
-        className="cursor-pointer text-gray-500 hover:text-gray-600 text-2xl"
+        className="cursor-pointer text-2xl text-gray-500 hover:text-gray-600"
       />
     </div>
   );

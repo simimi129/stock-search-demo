@@ -22,15 +22,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen bg-white flex flex-col items-center w-full`}>
-        <nav className="flex p-6 justify-between bg-white text-black items-center max-w-[1000px] w-full">
+        className={`${geistSans.variable} ${geistMono.variable} flex h-screen w-full flex-col items-center bg-white antialiased`}
+      >
+        <nav className="flex w-full max-w-[1000px] items-center justify-between bg-white p-6 text-black">
           <h1 className="text-lg sm:text-2xl">Stock Search App</h1>
           <div className="flex gap-1 sm:gap-6">
             <NavLink href="/">Stock Search</NavLink>
             <NavLink href="/favourites">Favourite Stocks</NavLink>
           </div>
         </nav>
-        <main className="text-black p-2 h-full w-full max-w-[1000px]">
+        <main className="flex h-full w-full max-w-[1000px] justify-center p-2 text-black">
           {children}
         </main>
       </body>

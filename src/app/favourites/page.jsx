@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import StockDetails from "../components/StockDetails";
+import StockDetailsClient from "../components/StockDetailsClient";
 
 export default function FavouriteStocksPage() {
   const [favouriteStocks, setFavouriteStocks] = useState([]);
@@ -16,25 +16,13 @@ export default function FavouriteStocksPage() {
     }
   }
 
-  function removeFavourite() {
-    let favourites = JSON.parse(localStorage.getItem("favourites"));
-    if (favourites) {
-      favourites = favourites.filter(
-        (fav) => fav.stockOverview["Symbol"] !== stockOverview["Symbol"]
-      );
-      localStorage.setItem("favourites", JSON.stringify(favourites));
-      setFavouriteStocks(favourites);
-    }
-  }
-
   return (
-    <div className="flex flex-wrap gap-4 max-w-[1000px] justify-center">
+    <div className="flex max-h-min w-full max-w-[1000px] flex-wrap justify-center gap-4">
       {favouriteStocks.map((stock) => (
-        <StockDetails
+        <StockDetailsClient
           key={stock["stockOverview"]["Symbol"]}
           stockQuote={stock["stockQuote"]}
           stockOverview={stock["stockOverview"]}
-          onRemoveFavourite={removeFavourite}
         />
       ))}
     </div>
